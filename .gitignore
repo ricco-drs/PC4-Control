@@ -1,0 +1,13 @@
+# Temporales / sistema
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.tmp
+~$*
+
+# Archivos temporales de Office
+~$*.xlsx
+~$*.docx
+
+# Carpeta de configuración local de Claude
+.claude/settings.local.json

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica Calificada 4 — Ejercicio 2 | Rubi Quispe Sierra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1>Práctica Calificada 4</h1>
+    <p class="autor">RUBI QUISPE SIERRA</p>
+    <p class="subtitulo">Control de Calidad Estadístico — Ejercicio 2: Carta p — Artículos Defectuosos</p>
+
+    <div class="contexto-box">
+      <h3>📊 Contexto del Análisis</h3>
+      <p>Para analizar la estabilidad de la cantidad de artículos defectuosos en un proceso de producción y tratar de mejorarlo, se toma una muestra de 120 piezas cada cuatro horas, mediante el método del intervalo. Los datos se obtuvieron durante seis días (20 muestras).</p>
+    </div>
+
+    <div class="badges">
+      <span class="badge">Tema: Gráfica de Control por Atributos</span>
+      <span class="badge">Carta p (unidades defectuosas, n constante)</span>
+      <span class="badge">n = 120 · k = 20 muestras</span>
+      <span class="badge">Sin bloque de Capacidad (atributos)</span>
+    </div>
+
+    <p class="nav-ejercicios"><a href="index.html">← Ejercicio 1 (X-Rm + Capacidad)</a></p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="tab1">Parte 1: Contexto y Enunciado</button>
+  <button class="tab-btn" data-tab="tab2">Parte 2: Gráfica de Control</button>
+  <button class="tab-btn" data-tab="tab3">Parte 3: Análisis Estadístico</button>
+  <button class="tab-btn" data-tab="tab4">Verificación</button>
+</nav>
+
+<main>
+
+<!-- ===================== TAB 1 ===================== -->
+<section id="tab1" class="tab-content active">
+
+  <div class="card">
+    <h2>Enunciado del ejercicio</h2>
+    <p>Para analizar la estabilidad de la cantidad de artículos defectuosos en un proceso de producción y tratar de mejorarlo, se toma una muestra de 120 piezas cada cuatro horas, mediante el método del intervalo. Los datos obtenidos durante seis días se muestran en la siguiente tabla:</p>
+
+    <div class="tabla-scroll">
+      <table class="tabla-datos">
+        <thead><tr><th>Muestra</th><th>Artículos Defectuosos</th><th>Muestra</th><th>Artículos Defectuosos</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>11</td><td>11</td><td>8</td></tr>
+          <tr><td>2</td><td>10</td><td>12</td><td>7</td></tr>
+          <tr><td>3</td><td>7</td><td>13</td><td>9</td></tr>
+          <tr><td>4</td><td>10</td><td>14</td><td>6</td></tr>
+          <tr><td>5</td><td>4</td><td>15</td><td>6</td></tr>
+          <tr><td>6</td><td>12</td><td>16</td><td>11</td></tr>
+          <tr><td>7</td><td>8</td><td>17</td><td>9</td></tr>
+          <tr><td>8</td><td>5</td><td>18</td><td>7</td></tr>
+          <tr><td>9</td><td>14</td><td>19</td><td>6</td></tr>
+          <tr><td>10</td><td>12</td><td>20</td><td>10</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="nota-especificacion"><strong>Datos clave:</strong> n = 120 (constante) &nbsp;|&nbsp; k = 20 muestras &nbsp;|&nbsp; Σnp = 172 &nbsp;|&nbsp; Σn = 2400</p>
+
+    <h3>Se pide</h3>
+    <ul class="se-pide">
+      <li><strong>a)</strong> Para analizar estos datos, ¿cuál carta recomendaría?</li>
+      <li><strong>b)</strong> Mediante una carta p, analice los datos y comente los resultados.</li>
+      <li><strong>c)</strong> ¿Cómo explicaría los límites de control que obtuvo?</li>
+      <li><strong>d)</strong> De acuerdo con los costos de producción, el nivel de artículos defectuosos máximo tolerable es de 10%. Por lo tanto, se sugiere que el límite de control superior de la carta p sea 0.10. ¿Es correcta esta sugerencia?</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Imagen original del enunciado</h2>
+    <img src="img/ENUNCIADO_EJERCICIO_2.png" alt="Enunciado del ejercicio 2" class="img-enunciado"
+         onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{className:'img-fallback',innerText:'Coloca la captura del enunciado en img/ENUNCIADO_EJERCICIO_2.png para que se muestre aquí automáticamente.'}));">
+  </div>
+
+  <div class="card clasificacion">
+    <h2>🔍 Clasificación del tema y justificación</h2>
+    <div class="tabla-scroll">
+      <table class="tabla-clasificacion">
+        <thead><tr><th>Pregunta clave</th><th>Respuesta según el enunciado</th><th>Conclusión</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>¿Medición continua (Variables) o de atributos?</td>
+            <td>Se cuentan "artículos defectuosos": cada pieza se clasifica como pasa/no pasa.</td>
+            <td>Rama de <strong>Atributos</strong> (se descarta Variables: X̄-R, X̄-S, X-Rm).</td>
+          </tr>
+          <tr>
+            <td>¿Se cuentan unidades defectuosas o defectos por unidad?</td>
+            <td>Cada pieza se clasifica como buena o mala; no hay conteo de múltiples defectos por pieza.</td>
+            <td>Rama de <strong>unidades defectuosas (p/np)</strong>; se descartan c y u.</td>
+          </tr>
+          <tr>
+            <td>¿Tamaño de muestra constante o variable?</td>
+            <td>n = 120 en las 20 muestras (constante).</td>
+            <td>Con n constante, p y np son equivalentes; se elige <strong>p</strong> por ser la exigida en (b) y por permitir comparación directa contra la tolerancia del 10% pedida en (d). Se descarta np.</td>
+          </tr>
+          <tr>
+            <td>¿Se activa el bloque de Capacidad de Procesos?</td>
+            <td>Se menciona una tolerancia del 10%, pero es un límite único sobre una proporción de atributo, no una especificación EI/ES sobre variable continua con σ.</td>
+            <td><strong>No se activa</strong> Capacidad de Procesos: Cp/Cpk/Cpm requieren datos continuos. La tolerancia se usa solo conceptualmente en la parte (d).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAB 2 ===================== -->
+<section id="tab2" class="tab-content">
+
+  <h2 class="parte-title">📈 Gráfica de Control por Atributos — Carta p</h2>
+
+  <div class="software-panel minitab">
+    <div class="software-header">
+      <span class="pill pill-minitab">MINITAB</span>
+      <h3>Gráfica de Series de Tiempo + Líneas de Referencia</h3>
+    </div>
+    <p>Minitab 18 no genera la carta p nativa a partir de datos ya resumidos (proporciones); por ello se aplicó el workaround estándar: <strong>Gráfica → Gráfica de Series de Tiempo → Simple</strong> (variable: p), agregando manualmente 7 líneas de referencia calculadas a partir de p̄ y σp.</p>
+
+    <div class="tabla-scroll">
+      <table class="tabla-referencias">
+        <thead><tr><th>Línea</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td class="ref-lcs">LCS</td><td>0.1423</td></tr>
+          <tr><td>+2σ</td><td>0.1188</td></tr>
+          <tr><td>+1σ</td><td>0.0952</td></tr>
+          <tr><td class="ref-lc">LC (p̄)</td><td>0.0717</td></tr>
+          <tr><td>-1σ</td><td>0.0481</td></tr>
+          <tr><td>-2σ</td><td>0.0246</td></tr>
+          <tr><td class="ref-lci">LCI</td><td>0.0010</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mini-chart-box">
+      <svg viewBox="0 0 900 340" class="chart-svg">
+        <line x1="70" y1="15" x2="860" y2="15" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="49.4" x2="860" y2="49.4" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="83.75" x2="860" y2="83.75" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="118.13" x2="860" y2="118.13" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="152.5" x2="860" y2="152.5" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="186.88" x2="860" y2="186.88" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="221.25" x2="860" y2="221.25" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="255.63" x2="860" y2="255.63" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="290" x2="860" y2="290" stroke="#999" stroke-width="1"/>
+        <text x="64" y="18" text-anchor="end" class="axis-tick">0.16</text>
+        <text x="64" y="122" text-anchor="end" class="axis-tick">0.10</text>
+        <text x="64" y="190" text-anchor="end" class="axis-tick">0.06</text>
+        <text x="64" y="293" text-anchor="end" class="axis-tick">0.00</text>
+        <line x1="70" y1="45.42" x2="860" y2="45.42" stroke="#c0392b" stroke-width="1.5"/>
+        <line x1="70" y1="85.81" x2="860" y2="85.81" stroke="#333" stroke-width="1"/>
+        <line x1="70" y1="126.38" x2="860" y2="126.38" stroke="#333" stroke-width="1"/>
+        <line x1="70" y1="166.79" x2="860" y2="166.79" stroke="#2e9e4a" stroke-width="1.5"/>
+        <line x1="70" y1="207.35" x2="860" y2="207.35" stroke="#333" stroke-width="1"/>
+        <line x1="70" y1="247.72" x2="860" y2="247.72" stroke="#333" stroke-width="1"/>
+        <line x1="70" y1="288.28" x2="860" y2="288.28" stroke="#c0392b" stroke-width="1.5"/>
+        <text x="864" y="48" class="mini-lim-label" fill="#c0392b">LCS=0.1423</text>
+        <text x="864" y="89" class="mini-lim-label" fill="#333">+2σ=0.1188</text>
+        <text x="864" y="130" class="mini-lim-label" fill="#333">+1σ=0.0952</text>
+        <text x="864" y="170" class="mini-lim-label" fill="#2e9e4a">p̄=0.0717</text>
+        <text x="864" y="211" class="mini-lim-label" fill="#333">-1σ=0.0481</text>
+        <text x="864" y="251" class="mini-lim-label" fill="#333">-2σ=0.0246</text>
+        <text x="864" y="291" class="mini-lim-label" fill="#c0392b">LCI=0.0010</text>
+        <polyline fill="none" stroke="#2D6FE0" stroke-width="1.8"
+          points="70,132.37 111.58,146.83 153.16,189.79 194.74,146.83 236.32,232.75 277.89,118.13 319.47,175.35 361.05,218.35 402.63,89.44 444.21,118.13 485.79,175.35 527.37,189.79 568.95,161.09 610.53,204.06 652.11,204.06 693.68,132.37 735.26,161.09 776.84,189.79 818.42,204.06 860,146.83"/>
+        <g fill="#2D6FE0">
+          <circle r="3" cx="70" cy="132.37"/><circle r="3" cx="111.58" cy="146.83"/><circle r="3" cx="153.16" cy="189.79"/>
+          <circle r="3" cx="194.74" cy="146.83"/><circle r="3" cx="236.32" cy="232.75"/><circle r="3" cx="277.89" cy="118.13"/>
+          <circle r="3" cx="319.47" cy="175.35"/><circle r="3" cx="361.05" cy="218.35"/>
+          <circle r="3" cx="444.21" cy="118.13"/><circle r="3" cx="485.79" cy="175.35"/><circle r="3" cx="527.37" cy="189.79"/>
+          <circle r="3" cx="568.95" cy="161.09"/><circle r="3" cx="610.53" cy="204.06"/><circle r="3" cx="652.11" cy="204.06"/>
+          <circle r="3" cx="693.68" cy="132.37"/><circle r="3" cx="735.26" cy="161.09"/><circle r="3" cx="776.84" cy="189.79"/>
+          <circle r="3" cx="818.42" cy="204.06"/><circle r="3" cx="860" cy="146.83"/>
+        </g>
+        <circle r="5" cx="402.63" cy="89.44" fill="#d4af37" stroke="#8a6d00" stroke-width="1.5"/>
+        <text x="402.63" y="75" text-anchor="middle" class="mini-lim-label" fill="#8a6d00">Muestra 9 (p=0.1167)</text>
+        <text x="70" y="308" class="axis-tick">1</text><text x="153" y="308" class="axis-tick">3</text><text x="236" y="308" class="axis-tick">5</text><text x="319" y="308" class="axis-tick">7</text><text x="402" y="308" class="axis-tick">9</text><text x="486" y="308" class="axis-tick">11</text><text x="569" y="308" class="axis-tick">13</text><text x="652" y="308" class="axis-tick">15</text><text x="735" y="308" class="axis-tick">17</text><text x="818" y="308" class="axis-tick">19</text>
+        <text x="465" y="325" text-anchor="middle" class="axis-label">Muestra</text>
+      </svg>
+    </div>
+
+    <div class="interpretacion-box">
+      <p><strong>Interpretación:</strong> Los 20 puntos (rango 0.0333–0.1167) se ubican dentro de LCI (0.0010) y LCS (0.1423), sin puntos fuera de control ni rachas o tendencias no aleatorias. La muestra 9 (p = 0.1167), resaltada, es el valor más alto de la serie y se usa como evidencia concreta en la parte (d) — está dentro del LCS real, aunque superaría el umbral de 0.10 sugerido por costos.</p>
+    </div>
+    <p class="ruta-software"><strong>Ruta en Minitab:</strong> Ingresar columna p → Gráfica → Gráfica de Series de Tiempo → Simple → Variable: p → doble clic en la gráfica → clic derecho → Agregar → Línea de referencia → pegar valores: 0.1423 0.1188 0.0952 0.0717 0.0481 0.0246 0.0010 → colorear LCS/LCI en rojo, LC en verde, ±1σ/±2σ en negro.</p>
+  </div>
+
+  <div class="software-panel excel">
+    <div class="software-header">
+      <span class="pill pill-excel">EXCEL</span>
+      <h3>Gráfica p con límites calculados</h3>
+    </div>
+    <p>Tabla larga generada (Muestra | p | LCS | LC | LCI, 20 filas con límites repetidos por fila), graficada como línea con marcadores junto a las líneas de control horizontales. Eje Y fijado de 0 a 0.16.</p>
+
+    <div class="mini-chart-box">
+      <svg viewBox="0 0 900 340" class="chart-svg">
+        <line x1="70" y1="15" x2="860" y2="15" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="118.13" x2="860" y2="118.13" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="221.25" x2="860" y2="221.25" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="70" y1="290" x2="860" y2="290" stroke="#999" stroke-width="1"/>
+        <text x="64" y="18" text-anchor="end" class="axis-tick">0.16</text>
+        <text x="64" y="122" text-anchor="end" class="axis-tick">0.10</text>
+        <text x="64" y="293" text-anchor="end" class="axis-tick">0.00</text>
+        <line x1="70" y1="45.42" x2="860" y2="45.42" stroke="#1E8E4E" stroke-width="1.5"/>
+        <line x1="70" y1="166.79" x2="860" y2="166.79" stroke="#e08300" stroke-width="1.5"/>
+        <line x1="70" y1="288.28" x2="860" y2="288.28" stroke="#1E8E4E" stroke-width="1.5"/>
+        <text x="864" y="48" class="mini-lim-label" fill="#1E8E4E">LCS=0.1423</text>
+        <text x="864" y="170" class="mini-lim-label" fill="#e08300">LC=0.0717</text>
+        <text x="864" y="291" class="mini-lim-label" fill="#1E8E4E">LCI=0.0010</text>
+        <polyline fill="none" stroke="#3f2478" stroke-width="1.8"
+          points="70,132.37 111.58,146.83 153.16,189.79 194.74,146.83 236.32,232.75 277.89,118.13 319.47,175.35 361.05,218.35 402.63,89.44 444.21,118.13 485.79,175.35 527.37,189.79 568.95,161.09 610.53,204.06 652.11,204.06 693.68,132.37 735.26,161.09 776.84,189.79 818.42,204.06 860,146.83"/>
+        <text x="70" y="308" class="axis-tick">1</text><text x="153" y="308" class="axis-tick">3</text><text x="236" y="308" class="axis-tick">5</text><text x="319" y="308" class="axis-tick">7</text><text x="402" y="308" class="axis-tick">9</text><text x="486" y="308" class="axis-tick">11</text><text x="569" y="308" class="axis-tick">13</text><text x="652" y="308" class="axis-tick">15</text><text x="735" y="308" class="axis-tick">17</text><text x="818" y="308" class="axis-tick">19</text>
+        <text x="465" y="325" text-anchor="middle" class="axis-label">Muestra</text>
+      </svg>
+    </div>
+
+    <p class="ruta-software"><strong>Fórmulas Excel:</strong> p(i) = <code>=Bi/120</code>; p̄ = <code>=SUMA(np)/SUMA(n)</code> = <code>=172/2400</code>; σp = <code>=RAIZ(p̄*(1-p̄)/120)</code>; LCS = <code>=p̄+3*σp</code>; LCI = <code>=p̄-3*σp</code>. Insertar → Gráficos recomendados → Línea con marcadores; colores: p = azul, LCS/LCI = verde, LC = naranja.</p>
+  </div>
+
+  <div class="card">
+    <h2>Cuadro comparativo Minitab vs. Excel</h2>
+    <div class="tabla-scroll">
+      <table class="tabla-comparativa">
+        <thead><tr><th>Parámetro</th><th>Minitab</th><th>Excel</th><th>¿Coinciden?</th></tr></thead>
+        <tbody>
+          <tr><td>p̄</td><td>0.0717</td><td>0.0717</td><td class="flag-ok">Sí</td></tr>
+          <tr><td>LCS</td><td>0.1423</td><td>0.1423</td><td class="flag-ok">Sí</td></tr>
+          <tr><td>LCI</td><td>0.0010</td><td>0.0010</td><td class="flag-ok">Sí</td></tr>
+          <tr><td>Puntos fuera de control</td><td>Ninguno</td><td>Ninguno</td><td class="flag-ok">Sí</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TAB 3 ===================== -->
+<section id="tab3" class="tab-content">
+
+  <div class="stat-row">
+    <div class="stat-card"><span class="stat-label">Proporción media (p̄)</span><span class="stat-value">0.0717</span></div>
+    <div class="stat-card"><span class="stat-label">Desv. Est. (σp)</span><span class="stat-value">0.02355</span></div>
+    <div class="stat-card"><span class="stat-label">LCS</span><span class="stat-value">0.1423</span></div>
+    <div class="stat-card"><span class="stat-label">LCI</span><span class="stat-value">0.0010</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Respuestas al enunciado</h2>
+
+    <h3>a) ¿Cuál carta recomendaría?</h3>
+    <p><strong>Carta p</strong>, justificada por atributos + unidades defectuosas + n constante, con preferencia sobre np por la comparabilidad porcentual requerida en la parte (d).</p>
+
+    <h3>b) Análisis mediante la carta p</h3>
+    <p>Los 20 puntos (rango 0.0333–0.1167) están dentro de LCI (0.0010) y LCS (0.1423), sin rachas ni tendencias.</p>
+    <span class="flag-ok flag-inline">Proceso estadísticamente estable</span>
+
+    <h3>c) Explicación de los límites de control</h3>
+    <p>LCS y LCI = p̄ ± 3σp representan la variación de causa común esperada dado el desempeño actual del proceso (p̄ = 7.17%, n = 120). Un punto fuera de estos límites señalaría una causa asignable a investigar. El LCI se conservó por ser positivo (no se truncó a cero).</p>
+
+    <h3>d) ¿Es correcta la sugerencia de fijar el LCS en 0.10?</h3>
+    <p>Se identificó el error clásico de confundir un <strong>límite de control</strong> (voz del proceso, calculado de los datos: 0.1423) con un <strong>límite de especificación/tolerancia</strong> (voz del negocio: 0.10). La muestra 9 (p = 0.1167) es evidencia concreta: está dentro del LCS real, pero aparecería como "fuera de control" bajo el umbral sugerido de 0.10, generando una falsa alarma (error tipo I).</p>
+    <span class="flag-bad flag-inline">No es correcta la sugerencia</span>
+  </div>
+
+  <div class="card">
+    <h2>Datos crudos — Gráfico de barras (artículos defectuosos por muestra)</h2>
+    <svg viewBox="0 0 800 220" class="chart-svg">
+      <line x1="45" y1="190" x2="780" y2="190" stroke="#ccc" stroke-width="1"/>
+      <g fill="#7a5fc4">
+        <rect x="50" y="56.4" width="25" height="133.6"/><rect x="86.5" y="68.6" width="25" height="121.4"/>
+        <rect x="123" y="105" width="25" height="85"/><rect x="159.5" y="68.6" width="25" height="121.4"/>
+        <rect x="196" y="141.4" width="25" height="48.6"/><rect x="232.5" y="44.3" width="25" height="145.7"/>
+        <rect x="269" y="92.9" width="25" height="97.1"/><rect x="305.5" y="129.3" width="25" height="60.7"/>
+        <rect x="342" y="20" width="25" height="170"/><rect x="378.5" y="44.3" width="25" height="145.7"/>
+        <rect x="415" y="92.9" width="25" height="97.1"/><rect x="451.5" y="105" width="25" height="85"/>
+        <rect x="488" y="80.7" width="25" height="109.3"/><rect x="524.5" y="117.1" width="25" height="72.9"/>
+        <rect x="561" y="117.1" width="25" height="72.9"/><rect x="597.5" y="56.4" width="25" height="133.6"/>
+        <rect x="634" y="80.7" width="25" height="109.3"/><rect x="670.5" y="105" width="25" height="85"/>
+        <rect x="707" y="117.1" width="25" height="72.9"/><rect x="743.5" y="68.6" width="25" height="121.4"/>
+      </g>
+      <text x="415" y="210" text-anchor="middle" class="axis-label">Muestra (1 – 20)</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <h2>Conclusiones</h2>
+    <ul class="lista-conclusiones">
+      <li>◆ El proceso se muestra estadísticamente estable en el periodo analizado, sin puntos fuera de control ni patrones no aleatorios.</li>
+      <li>◆ p̄ = 7.17%, por debajo de la tolerancia de costos (10%), lo que indica un desempeño promedio aceptable — análisis independiente de la estabilidad.</li>
+      <li>◆ La sugerencia de fijar LCS = 0.10 es estadísticamente incorrecta, pues mezcla un límite de control con un límite de especificación.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Recomendaciones</h2>
+    <ul class="lista-recomendaciones">
+      <li>→ Monitorear el proceso con los límites calculados (LCS = 0.1423, LC = 0.0717, LCI = 0.0010), no con el umbral de costos.</li>
+      <li>→ Tratar el 10% de tolerancia como un KPI de negocio separado, comparado directamente contra p̄.</li>
+      <li>→ Si se busca reducir el nivel de defectuosos, iniciar un proyecto de mejora de proceso, no redefinir los límites estadísticos.</li>
+      <li>→ Investigar informalmente las causas de la muestra 9 (máximo) y la muestra 5 (mínimo) como buena práctica, sin tratarlas como señales de descontrol.</li>
+      <li>→ Continuar recolectando datos para ampliar la base de 20 muestras y consolidar el análisis de estabilidad.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== TAB 4 ===================== -->
+<section id="tab4" class="tab-content">
+  <div class="card">
+    <h2>Capturas originales — Verificación</h2>
+    <p>Gráficas generadas directamente en Minitab y Excel, tal como fueron proporcionadas, sin recrear ni modificar.</p>
+
+    <h3>Gráfica de Carta p (Minitab)</h3>
+    <img class="verificacion-img" src="img/GRAFICA_CARTA_P_MINITAB_EJERCICIO_2.png" alt="Gráfica de carta p original Minitab"
+         onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{className:'img-fallback',innerText:'Coloca la captura en img/GRAFICA_CARTA_P_MINITAB_EJERCICIO_2.png para que se muestre aquí automáticamente.'}));">
+
+    <h3>Gráfica de Carta p (Excel)</h3>
+    <img class="verificacion-img" src="img/GRAFICA_CARTA_P_EXCEL_EJERCICIO_2.png" alt="Gráfica de carta p original Excel"
+         onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{className:'img-fallback',innerText:'Coloca la captura en img/GRAFICA_CARTA_P_EXCEL_EJERCICIO_2.png para que se muestre aquí automáticamente.'}));">
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>Práctica Calificada 4 · Control de Calidad Estadístico | Elaborado por Rubi Quispe Sierra</p>
+</footer>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
