@@ -1,11 +1,11 @@
-# PC4 · Ejercicio 5 — Control de Calidad Estadístico
+# PC4 · Ejercicio 1 — Control de Calidad Estadístico
 
 **Autora:** Rubi Quispe Sierra
 **Curso:** Control de Calidad Estadístico — Práctica Calificada 4
 
 ## Estructura de entrega
 ```
-EJERCICIO_5/
+EJERCICIO_1/
 ├── index.html
 ├── css/estilos.css
 ├── img/

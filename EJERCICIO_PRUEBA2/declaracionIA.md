@@ -1,4 +1,4 @@
-# Declaración de uso de IA — Ejercicio 5
+# Declaración de uso de IA — Ejercicio 2
 
 - **Herramientas utilizadas:**
 - **Porcentaje aproximado de apoyo de IA:**
